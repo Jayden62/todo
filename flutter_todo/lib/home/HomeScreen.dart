@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/stateless/TopStateless.dart';
+import 'package:flutter_todo/style/BaseStyle.dart';
 
 class HomeScreen extends StatefulWidget {
   final String appName;
@@ -60,10 +61,10 @@ class HomeState extends State<HomeScreen> {
   PreferredSize get initAppBar {
     /// Default appbar is transparent.
     return PreferredSize(
-        preferredSize: Size.fromHeight(0),
+        preferredSize: Size.fromHeight(height0),
         child: AppBar(
           backgroundColor: Colors.white,
-          elevation: 0,
+          elevation: elevation0,
         ));
   }
 }
