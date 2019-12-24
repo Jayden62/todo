@@ -72,13 +72,15 @@ class HomeState extends State<HomeScreen> {
         child: PageView(
       onPageChanged: (value) {
         switch (value) {
-//        case 0:
-//          tabStream.sink.add(true);
-//          break;
-//        case 1:
-//          tabStream.sink.add(false);
-//
-//          break;
+          case 0:
+            tabStream.sink.add(0);
+            break;
+          case 1:
+            tabStream.sink.add(1);
+            break;
+          case 2:
+            tabStream.sink.add(2);
+            break;
         }
       },
       controller: pageController,
@@ -115,6 +117,7 @@ class HomeState extends State<HomeScreen> {
                         ),
                         onTap: () {
                           tabStream.sink.add(0);
+                          pageController.jumpToPage(0);
                         },
                       )
                     : TabStateless(
@@ -125,6 +128,7 @@ class HomeState extends State<HomeScreen> {
                         icon: Icon(Icons.list),
                         onTap: () {
                           tabStream.sink.add(0);
+                          pageController.jumpToPage(0);
                         },
                       );
               },
@@ -153,6 +157,7 @@ class HomeState extends State<HomeScreen> {
                         ),
                         onTap: () {
                           tabStream.sink.add(1);
+                          pageController.jumpToPage(1);
                         },
                       )
                     : TabStateless(
@@ -163,6 +168,7 @@ class HomeState extends State<HomeScreen> {
                         icon: Icon(Icons.check),
                         onTap: () {
                           tabStream.sink.add(1);
+                          pageController.jumpToPage(1);
                         },
                       );
               },
@@ -191,6 +197,7 @@ class HomeState extends State<HomeScreen> {
                         ),
                         onTap: () {
                           tabStream.sink.add(2);
+                          pageController.jumpToPage(2);
                         },
                       )
                     : TabStateless(
@@ -201,6 +208,7 @@ class HomeState extends State<HomeScreen> {
                         icon: Icon(Icons.error_outline),
                         onTap: () {
                           tabStream.sink.add(2);
+                          pageController.jumpToPage(2);
                         },
                       );
               },
