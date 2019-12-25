@@ -2,11 +2,13 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/all/AllScreen.dart';
-import 'package:flutter_todo/check/CheckScreen.dart';
+import 'package:flutter_todo/complete/CompleteScreen.dart';
+import 'package:flutter_todo/incomplete/InCompleteScreen.dart';
+import 'package:flutter_todo/item/HomeItem.dart';
 import 'package:flutter_todo/stateless/TabStateless.dart';
 import 'package:flutter_todo/stateless/TopStateless.dart';
 import 'package:flutter_todo/style/BaseStyle.dart';
-import 'package:flutter_todo/uncheck/UnCheckScreen.dart';
+import 'package:uuid/uuid.dart';
 
 class HomeScreen extends StatefulWidget {
   final String appName;
@@ -21,6 +23,64 @@ class HomeState extends State<HomeScreen> {
   final PageController pageController = PageController();
   final tabStream = StreamController<int>.broadcast();
   int value;
+
+  /// Hard code data in list
+  List<HomeItem> list = [
+    HomeItem(
+      Uuid().v1(),
+      'title 1',
+      'content 1',
+      isChecked: false,
+    ),
+    HomeItem(
+      Uuid().v1(),
+      'title 2',
+      'content 2',
+      isChecked: false,
+    ),
+    HomeItem(
+      Uuid().v1(),
+      'title 3',
+      'content 3',
+      isChecked: true,
+    ),
+    HomeItem(
+      Uuid().v1(),
+      'title 4',
+      'content 4',
+      isChecked: true,
+    ),
+    HomeItem(
+      Uuid().v1(),
+      'title 5',
+      'content 5',
+      isChecked: true,
+    ),
+    HomeItem(
+      Uuid().v1(),
+      'title 6',
+      'content 6',
+      isChecked: false,
+    ),
+    HomeItem(
+      Uuid().v1(),
+      'title 7',
+      'content 7',
+      isChecked: true,
+    ),
+    HomeItem(
+      Uuid().v1(),
+      'title 8',
+      'content 8',
+      isChecked: false,
+    ),
+    HomeItem(
+      Uuid().v1(),
+      'title 9',
+      'content 9',
+      isChecked: false,
+    ),
+  ];
 
   @override
   void initState() {
@@ -64,9 +124,9 @@ class HomeState extends State<HomeScreen> {
 
   Widget get initPages {
     List<Widget> widgets = [
-      AllScreen(),
-      CheckScreen(),
-      UnCheckScreen(),
+      AllScreen(list),
+      CompleteScreen(list),
+      InCompleteScreen(list),
     ];
     return Expanded(
         child: PageView(
@@ -107,7 +167,7 @@ class HomeState extends State<HomeScreen> {
                 return value == 0
                     ? TabStateless(
                         Text(
-                          'ALL',
+                          'All',
                           style: TextStyle(
                               color: tabColor, fontWeight: FontWeight.bold),
                         ),
@@ -122,7 +182,7 @@ class HomeState extends State<HomeScreen> {
                       )
                     : TabStateless(
                         Text(
-                          'ALL',
+                          'All',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         icon: Icon(Icons.list),
@@ -147,7 +207,7 @@ class HomeState extends State<HomeScreen> {
                 return value == 1
                     ? TabStateless(
                         Text(
-                          'CHECK',
+                          'Complete',
                           style: TextStyle(
                               color: tabColor, fontWeight: FontWeight.bold),
                         ),
@@ -162,7 +222,7 @@ class HomeState extends State<HomeScreen> {
                       )
                     : TabStateless(
                         Text(
-                          'CHECK',
+                          'Complete',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         icon: Icon(Icons.check),
@@ -187,7 +247,7 @@ class HomeState extends State<HomeScreen> {
                 return value == 2
                     ? TabStateless(
                         Text(
-                          'UNNCHECK',
+                          'Incomplete',
                           style: TextStyle(
                               color: tabColor, fontWeight: FontWeight.bold),
                         ),
@@ -202,7 +262,7 @@ class HomeState extends State<HomeScreen> {
                       )
                     : TabStateless(
                         Text(
-                          'UNNCHECK',
+                          'Incomplete',
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         icon: Icon(Icons.error_outline),
