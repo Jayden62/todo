@@ -22,6 +22,10 @@ class HomeState extends State<HomeItem> {
   @override
   void initState() {
     super.initState();
+
+    /// Use delayed {milliseconds: 50} because of on UI the stream controller did not shoot back UI.
+    Future.delayed(Duration(milliseconds: 50),
+        () => checkStream.sink.add(widget.isChecked));
   }
 
   @override
@@ -40,7 +44,7 @@ class HomeState extends State<HomeItem> {
         if (snapshot.hasData) {
           check = snapshot.data;
           if (check) {
-            colorItem = Colors.blue[100];
+            colorItem = Colors.grey[200];
           } else {
             colorItem = whiteColor;
           }
@@ -83,7 +87,7 @@ class HomeState extends State<HomeItem> {
               }
               return check;
             },
-            value: widget.isChecked,
+            value: check,
           );
         },
       ));
