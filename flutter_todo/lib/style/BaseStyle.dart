@@ -8,6 +8,8 @@ var topBgColor = Color.fromARGB(255, 0, 120, 226);
 var whiteColor = Colors.white;
 var font16 = 16.0;
 var margin10 = 10.0;
+var margin15 = 15.0;
+var margin20 = 20.0;
 var margin5 = 5.0;
 var tabColor = Color.fromARGB(255, 0, 120, 226);
 
