@@ -4,7 +4,7 @@ import 'package:flutter_todo/model/Note.dart';
 
 class InCompleteScreen extends StatefulWidget {
   /// List contain all items
-  final List<HomeComponent> list;
+  final List<Note> list;
 
   InCompleteScreen(this.list);
 
@@ -15,7 +15,7 @@ class InCompleteScreen extends StatefulWidget {
 class InCompleteState extends State<InCompleteScreen>
     with AutomaticKeepAliveClientMixin {
   /// List contain item incomplete
-  List<HomeComponent> inCompleteList = [];
+  List<Note> inCompleteList = [];
 
   @override
   void initState() {
@@ -23,7 +23,7 @@ class InCompleteState extends State<InCompleteScreen>
 
     /// Find item is being incomplete
     for (var item in widget.list) {
-      if (!item.item.isChecked) {
+      if (!item.isChecked) {
         inCompleteList.add(item);
       }
     }
@@ -38,7 +38,7 @@ class InCompleteState extends State<InCompleteScreen>
         child: ListView.builder(
             itemCount: inCompleteList.length,
             itemBuilder: (BuildContext context, int index) => HomeComponent(
-                  inCompleteList[index].item,
+                  inCompleteList[index],
                   callback: (Note note, bool value) {},
                 )));
   }
