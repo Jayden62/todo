@@ -40,6 +40,7 @@ class AllState extends State<AllScreen> {
         List<HomeItem> result;
         if (snapshot.data != null && snapshot.hasData) {
           result = snapshot.data;
+
         } else {
           result = [];
         }
