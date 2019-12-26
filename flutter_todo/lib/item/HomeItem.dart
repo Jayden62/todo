@@ -28,6 +28,7 @@ class HomeState extends State<HomeItem> {
         onChanged: (bool value) {
           /// Call back
           widget.callback(widget.item, value);
+
           return value;
         },
         value: widget.item.isChecked ? true : false,
