@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/item/HomeItem.dart';
+import 'package:flutter_todo/model/Note.dart';
 
 class CompleteScreen extends StatefulWidget {
   final List<HomeItem> list;
@@ -28,7 +29,9 @@ class CompleteState extends State<CompleteScreen> {
     return Container(
         child: ListView.builder(
             itemCount: completeList.length,
-            itemBuilder: (BuildContext context, int index) =>
-                HomeItem(completeList[index].item)));
+            itemBuilder: (BuildContext context, int index) => HomeItem(
+                  completeList[index].item,
+                  callback: (Note note, bool value) {},
+                )));
   }
 }

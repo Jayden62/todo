@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/item/HomeItem.dart';
+import 'package:flutter_todo/model/Note.dart';
 
 class InCompleteScreen extends StatefulWidget {
   final List<HomeItem> list;
@@ -28,7 +29,9 @@ class InCompleteState extends State<InCompleteScreen> {
     return Container(
         child: ListView.builder(
             itemCount: inCompleteList.length,
-            itemBuilder: (BuildContext context, int index) =>
-                HomeItem(inCompleteList[index].item)));
+            itemBuilder: (BuildContext context, int index) => HomeItem(
+                  inCompleteList[index].item,
+                  callback: (Note note, bool value) {},
+                )));
   }
 }

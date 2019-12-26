@@ -56,7 +56,7 @@ class AllState extends State<AllScreen> {
                     Note found;
                     for (var element in widget.list) {
                       /// Call back from item, i will compare item selected to all off items in list via id.
-                      /// If matched, i will assign and refresh list.
+                      /// If matched, it will be assigned.
                       if (element.item.id == note.id) {
                         found = element.item;
                         break;
