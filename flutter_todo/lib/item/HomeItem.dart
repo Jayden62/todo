@@ -1,15 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/model/Note.dart';
 import 'package:flutter_todo/style/BaseStyle.dart';
 
 class HomeItem extends StatefulWidget {
-  final String id;
-  final String title;
-  final String content;
-  final bool isChecked;
+  final Note item;
 
-  const HomeItem(this.id, this.title, this.content, {this.isChecked});
+  HomeItem(this.item);
 
   @override
   State<StatefulWidget> createState() => HomeState();
@@ -25,7 +23,7 @@ class HomeState extends State<HomeItem> {
 
     /// Use delayed {milliseconds: 50} because of on UI the stream controller did not shoot back UI.
     Future.delayed(Duration(milliseconds: 50),
-        () => checkStream.sink.add(widget.isChecked));
+        () => checkStream.sink.add(widget.item.isChecked));
   }
 
   @override
@@ -103,7 +101,7 @@ class HomeState extends State<HomeItem> {
               Container(
                 padding: EdgeInsets.all(padding5),
                 child: Text(
-                  widget.title,
+                  widget.item.title,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                 ),
               ),
@@ -111,7 +109,7 @@ class HomeState extends State<HomeItem> {
               /// Content
               Container(
                 padding: EdgeInsets.all(padding5),
-                child: Text(widget.content),
+                child: Text(widget.item.content),
               ),
             ],
           )));

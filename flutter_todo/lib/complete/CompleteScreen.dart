@@ -17,7 +17,7 @@ class CompleteState extends State<CompleteScreen> {
   void initState() {
     super.initState();
     for (var item in widget.list) {
-      if (item.isChecked) {
+      if (item.item.isChecked) {
         completeList.add(item);
       }
     }

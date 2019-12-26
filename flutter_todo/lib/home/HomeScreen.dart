@@ -5,6 +5,7 @@ import 'package:flutter_todo/all/AllScreen.dart';
 import 'package:flutter_todo/complete/CompleteScreen.dart';
 import 'package:flutter_todo/incomplete/InCompleteScreen.dart';
 import 'package:flutter_todo/item/HomeItem.dart';
+import 'package:flutter_todo/model/Note.dart';
 import 'package:flutter_todo/stateless/TabStateless.dart';
 import 'package:flutter_todo/stateless/TopStateless.dart';
 import 'package:flutter_todo/style/BaseStyle.dart';
@@ -23,68 +24,42 @@ class HomeState extends State<HomeScreen> {
   final PageController pageController = PageController();
   final tabStream = StreamController<int>.broadcast();
   int value;
-
-  /// Hard code data in list
-  List<HomeItem> list = [
-    HomeItem(
-      Uuid().v1(),
-      'title 1',
-      'content 1',
-      isChecked: false,
-    ),
-    HomeItem(
-      Uuid().v1(),
-      'title 2',
-      'content 2',
-      isChecked: false,
-    ),
-    HomeItem(
-      Uuid().v1(),
-      'title 3',
-      'content 3',
-      isChecked: true,
-    ),
-    HomeItem(
-      Uuid().v1(),
-      'title 4',
-      'content 4',
-      isChecked: true,
-    ),
-    HomeItem(
-      Uuid().v1(),
-      'title 5',
-      'content 5',
-      isChecked: true,
-    ),
-    HomeItem(
-      Uuid().v1(),
-      'title 6',
-      'content 6',
-      isChecked: false,
-    ),
-    HomeItem(
-      Uuid().v1(),
-      'title 7',
-      'content 7',
-      isChecked: true,
-    ),
-    HomeItem(
-      Uuid().v1(),
-      'title 8',
-      'content 8',
-      isChecked: false,
-    ),
-    HomeItem(
-      Uuid().v1(),
-      'title 9',
-      'content 9',
-      isChecked: false,
-    ),
-  ];
+  bool isChecked;
+  List<HomeItem> list = List();
 
   @override
   void initState() {
     super.initState();
+
+    for (int index = 1; index < 9; index++) {
+      switch (index) {
+        case 2:
+          isChecked = true;
+          break;
+        case 4:
+          isChecked = true;
+          break;
+        case 7:
+          isChecked = true;
+          break;
+        case 8:
+          isChecked = true;
+          break;
+        default:
+          {
+            isChecked = false;
+          }
+          break;
+      }
+      list.add(HomeItem(
+        Note(
+          id: Uuid().v1(),
+          title: 'title $index',
+          content: 'content $index',
+          isChecked: isChecked,
+        ),
+      ));
+    }
 
     Future.delayed(Duration(milliseconds: 50), () {
       tabStream.sink.add(0);

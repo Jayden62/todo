@@ -17,7 +17,7 @@ class InCompleteState extends State<InCompleteScreen> {
   void initState() {
     super.initState();
     for (var item in widget.list) {
-      if (!item.isChecked) {
+      if (!item.item.isChecked) {
         inCompleteList.add(item);
       }
     }

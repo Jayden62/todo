@@ -4,7 +4,7 @@ class Note {
   String content;
   bool isChecked;
 
-  Note({this.id, this.title, this.content});
+  Note({this.id, this.title, this.content,this.isChecked});
 
   Note.fromJson(Map<String, dynamic> json) {
     id = json['id'];
