@@ -19,6 +19,9 @@ class AllState extends State<AllScreen> {
   @override
   void initState() {
     super.initState();
+
+    /// Because of on UI the stream controller is not finished right at that time.
+    /// Use delayed {milliseconds: 50} to be waiting up stream shoot back and render UI.
     Future.delayed(
         Duration(milliseconds: 50), () => allStream.sink.add(widget.list));
   }
@@ -51,6 +54,8 @@ class AllState extends State<AllScreen> {
                     /// Handle call back
                     Note found;
                     for (var element in widget.list) {
+                      /// Call back from item, i will compare item selected to all off items in list via id.
+                      /// If matched, i will assign and refresh list.
                       if (element.item.id == note.id) {
                         found = element.item;
                         break;
@@ -61,7 +66,6 @@ class AllState extends State<AllScreen> {
                       found.isChecked = value;
                       allStream.sink.add(widget.list);
                     }
-                    allStream.sink.add(widget.list);
                   },
                 ),
               );
