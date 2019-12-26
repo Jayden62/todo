@@ -33,7 +33,6 @@ class CompleteState extends State<CompleteScreen> with AutomaticKeepAliveClientM
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    print('CompleteScreen call build');
     /// Create list contain item is being complete
     return Container(
         child: ListView.builder(
