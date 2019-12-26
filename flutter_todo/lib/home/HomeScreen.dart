@@ -39,7 +39,7 @@ class HomeState extends State<HomeScreen> {
         case 4:
           isChecked = true;
           break;
-        case 7:
+        case 6:
           isChecked = true;
           break;
         case 8:
