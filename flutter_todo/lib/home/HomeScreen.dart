@@ -3,13 +3,20 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/all/AllScreen.dart';
 import 'package:flutter_todo/complete/CompleteScreen.dart';
+import 'package:flutter_todo/home/component/BottomComponent.dart';
 import 'package:flutter_todo/incomplete/InCompleteScreen.dart';
-import 'package:flutter_todo/item/HomeItem.dart';
 import 'package:flutter_todo/model/Note.dart';
-import 'package:flutter_todo/stateless/TabStateless.dart';
-import 'package:flutter_todo/stateless/TopStateless.dart';
+import 'package:flutter_todo/home/component/TopComponent.dart';
+import 'package:flutter_todo/sharedcomponent/HomeComponent.dart';
 import 'package:flutter_todo/style/BaseStyle.dart';
 import 'package:uuid/uuid.dart';
+
+/// Index of page all
+const int PAGE_ALL = 0;
+/// Index of page complete
+const int PAGE_COMPLETE = 1;
+/// Index of page incomplete
+const int PAGE_INCOMPLETE = 2;
 
 class HomeScreen extends StatefulWidget {
   final String appName;
@@ -25,7 +32,7 @@ class HomeState extends State<HomeScreen> {
   final tabStream = StreamController<int>.broadcast();
   int value;
   bool isChecked;
-  List<HomeItem> list = List();
+  List<Note> list = List();
 
   @override
   void initState() {
@@ -51,19 +58,19 @@ class HomeState extends State<HomeScreen> {
           }
           break;
       }
-      list.add(HomeItem(
+      list.add(
         Note(
           id: Uuid().v1(),
           title: 'title $index',
           content: 'content $index',
           isChecked: isChecked,
         ),
-      ));
+      );
     }
 
-    Future.delayed(Duration(milliseconds: 50), () {
-      tabStream.sink.add(0);
-    });
+//    Future.delayed(Duration(milliseconds: 50), () {
+//      tabStream.sink.add(0);
+//    });
   }
 
   @override
@@ -81,6 +88,7 @@ class HomeState extends State<HomeScreen> {
     );
   }
 
+  /// Init body
   Widget get initBody => WillPopScope(
         /// WillPopScope will be disable Back Button on Android
         onWillPop: () async => false,
@@ -90,13 +98,20 @@ class HomeState extends State<HomeScreen> {
           children: <Widget>[
             initTop,
             initPages,
-            initBottom,
+            BottomComponent(
+              tabStream: tabStream,
+              /// Handle event tab icon
+              callback: (int tabIndex){
+                pageController.jumpToPage(tabIndex);
+              },
+            ),
           ],
         )),
       );
 
-  Widget get initTop => TopStateless(title: widget.appName);
+  Widget get initTop => TopComponent(title: widget.appName);
 
+  /// Init pages AllScreen, CompleteScreen, InCompleteScreen
   Widget get initPages {
     List<Widget> widgets = [
       AllScreen(list),
@@ -106,15 +121,16 @@ class HomeState extends State<HomeScreen> {
     return Expanded(
         child: PageView(
       onPageChanged: (value) {
+        /// Handle page changed
         switch (value) {
-          case 0:
-            tabStream.sink.add(0);
+          case PAGE_ALL:
+            tabStream.sink.add(PAGE_ALL);
             break;
-          case 1:
-            tabStream.sink.add(1);
+          case PAGE_COMPLETE:
+            tabStream.sink.add(PAGE_COMPLETE);
             break;
-          case 2:
-            tabStream.sink.add(2);
+          case PAGE_INCOMPLETE:
+            tabStream.sink.add(PAGE_INCOMPLETE);
             break;
         }
       },
@@ -123,134 +139,6 @@ class HomeState extends State<HomeScreen> {
     ));
   }
 
-  Widget get initBottom => Container(
-        height: height60,
-        decoration: swapDecoration,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            /// All
-            StreamBuilder(
-              stream: tabStream.stream,
-              builder: (context, snapshot) {
-                if (snapshot.data != null && snapshot.hasData) {
-                  value = snapshot.data;
-                } else {
-                  value = -1;
-                }
-
-                return value == 0
-                    ? TabStateless(
-                        Text(
-                          'All',
-                          style: TextStyle(
-                              color: tabColor, fontWeight: FontWeight.bold),
-                        ),
-                        icon: Icon(
-                          Icons.list,
-                          color: tabColor,
-                        ),
-                        onTap: () {
-                          tabStream.sink.add(0);
-                          pageController.jumpToPage(0);
-                        },
-                      )
-                    : TabStateless(
-                        Text(
-                          'All',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        icon: Icon(Icons.list),
-                        onTap: () {
-                          tabStream.sink.add(0);
-                          pageController.jumpToPage(0);
-                        },
-                      );
-              },
-            ),
-
-            /// Check
-            StreamBuilder(
-              stream: tabStream.stream,
-              builder: (context, snapshot) {
-                if (snapshot.data != null && snapshot.hasData) {
-                  value = snapshot.data;
-                } else {
-                  value = -1;
-                }
-
-                return value == 1
-                    ? TabStateless(
-                        Text(
-                          'Complete',
-                          style: TextStyle(
-                              color: tabColor, fontWeight: FontWeight.bold),
-                        ),
-                        icon: Icon(
-                          Icons.check,
-                          color: tabColor,
-                        ),
-                        onTap: () {
-                          tabStream.sink.add(1);
-                          pageController.jumpToPage(1);
-                        },
-                      )
-                    : TabStateless(
-                        Text(
-                          'Complete',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        icon: Icon(Icons.check),
-                        onTap: () {
-                          tabStream.sink.add(1);
-                          pageController.jumpToPage(1);
-                        },
-                      );
-              },
-            ),
-
-            /// Uncheck
-            StreamBuilder(
-              stream: tabStream.stream,
-              builder: (context, snapshot) {
-                if (snapshot.data != null && snapshot.hasData) {
-                  value = snapshot.data;
-                } else {
-                  value = -1;
-                }
-
-                return value == 2
-                    ? TabStateless(
-                        Text(
-                          'Incomplete',
-                          style: TextStyle(
-                              color: tabColor, fontWeight: FontWeight.bold),
-                        ),
-                        icon: Icon(
-                          Icons.error_outline,
-                          color: tabColor,
-                        ),
-                        onTap: () {
-                          tabStream.sink.add(2);
-                          pageController.jumpToPage(2);
-                        },
-                      )
-                    : TabStateless(
-                        Text(
-                          'Incomplete',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        icon: Icon(Icons.error_outline),
-                        onTap: () {
-                          tabStream.sink.add(2);
-                          pageController.jumpToPage(2);
-                        },
-                      );
-              },
-            ),
-          ],
-        ),
-      );
 
   PreferredSize get initAppBar {
     /// Default appbar is transparent.

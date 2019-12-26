@@ -1,11 +1,10 @@
 import 'dart:async';
-
+import 'package:flutter_todo/sharedcomponent/HomeComponent.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_todo/item/HomeItem.dart';
 import 'package:flutter_todo/model/Note.dart';
 
-class AllScreen extends StatefulWidget {
-  final List<HomeItem> list;
+class AllScreen extends StatefulWidget{
+  final List<Note> list;
 
   AllScreen(this.list);
 
@@ -13,64 +12,38 @@ class AllScreen extends StatefulWidget {
   State<StatefulWidget> createState() => AllState();
 }
 
-class AllState extends State<AllScreen> {
-  final allStream = StreamController<List<HomeItem>>.broadcast();
-
-  @override
-  void initState() {
-    super.initState();
-
-    /// Because of on UI the stream controller is not finished right at that time.
-    /// Use delayed {milliseconds: 50} to be waiting up stream shoot back and render UI.
-    Future.delayed(
-        Duration(milliseconds: 50), () => allStream.sink.add(widget.list));
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    allStream.close();
-  }
+class AllState extends State<AllScreen> with AutomaticKeepAliveClientMixin{
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: allStream.stream,
-      builder: (context, snapshot) {
-        List<HomeItem> result;
-        if (snapshot.data != null && snapshot.hasData) {
-          result = snapshot.data;
+    super.build(context);
+    print('AllScreen call build');
 
-        } else {
-          result = [];
-        }
-
-        return result.isEmpty
-            ? Container()
-            : ListView.builder(
-                itemCount: result.length,
-                itemBuilder: (BuildContext context, int index) => HomeItem(
-                  result[index].item,
+            return ListView.builder(
+                itemCount: widget.list.length,
+                itemBuilder: (BuildContext context, int index) => HomeComponent(
+                  widget.list[index],
                   callback: (Note note, bool value) {
                     /// Handle call back
                     Note found;
                     for (var element in widget.list) {
                       /// Call back from item, i will compare item selected to all off items in list via id.
                       /// If matched, it will be assigned.
-                      if (element.item.id == note.id) {
-                        found = element.item;
+                      if (element.id == note.id) {
+                        found = element;
                         break;
                       }
                     }
 
                     if (found != null) {
                       found.isChecked = value;
-                      allStream.sink.add(widget.list);
                     }
                   },
                 ),
               );
-      },
-    );
+
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

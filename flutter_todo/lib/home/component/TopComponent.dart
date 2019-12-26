@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/style/BaseStyle.dart';
 
-class TopStateless extends StatelessWidget {
+class TopComponent extends StatelessWidget {
+  /// Callback when tapping left icon
   final Function onLeft;
+  /// Callback when tapping right iconn
   final Function onRight;
+  /// Left icon
   final Widget leftIcon;
+  /// Right icon
   final Widget rightIcon;
+  /// Title
   final String title;
 
-  TopStateless(
+  TopComponent(
       {this.onLeft, this.title, this.onRight, this.leftIcon, this.rightIcon});
 
   @override
@@ -19,22 +24,27 @@ class TopStateless extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
+          /// Left icon
           GestureDetector(
+              /// Callback when user tapping icon
               onTap: () {
                 onLeft();
               },
               child: Container(
-                  margin: EdgeInsets.only(left: margin10), child: rightIcon)),
+                  margin: EdgeInsets.only(left: margin10), child: leftIcon)),
+          /// Title
           Text(
             title,
             style: TextStyle(color: whiteColor, fontSize: font16),
           ),
+          /// Right icon
           GestureDetector(
+              /// Callback when user tapping icon
               onTap: () {
                 onRight();
               },
               child: Container(
-                  margin: EdgeInsets.only(right: margin10), child: leftIcon)),
+                  margin: EdgeInsets.only(right: margin10), child: rightIcon)),
         ],
       ),
     );

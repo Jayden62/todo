@@ -2,22 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/model/Note.dart';
 import 'package:flutter_todo/style/BaseStyle.dart';
 
-class HomeItem extends StatefulWidget {
+class HomeComponent extends StatefulWidget {
+
+  /// Note contains info to display
   final Note item;
+  /// Callback when tapping checkbox.
   final Function(Note item, bool value) callback;
 
-  HomeItem(this.item, {this.callback});
+  HomeComponent(this.item, {this.callback});
 
   @override
   State<StatefulWidget> createState() => HomeState();
 }
 
-class HomeState extends State<HomeItem> {
+class HomeState extends State<HomeComponent> {
+
   @override
   Widget build(BuildContext context) {
+    /// Create item if true, set item background is gray color else is white color
     return Container(
       color: widget.item.isChecked ? Colors.grey[200] : whiteColor,
-      child: Row(children: <Widget>[base, checkBox]),
+      child: Row(children: <Widget>[info, checkBox]),
     );
   }
 
@@ -31,11 +36,12 @@ class HomeState extends State<HomeItem> {
 
           return value;
         },
+        /// True value will be displayed check
         value: widget.item.isChecked ? true : false,
       ));
 
-  /// Base
-  Widget get base => Expanded(
+  /// Info contain title, content.
+  Widget get info => Expanded(
       child: Container(
           margin: EdgeInsets.only(left: margin10, top: margin10),
           child: Column(

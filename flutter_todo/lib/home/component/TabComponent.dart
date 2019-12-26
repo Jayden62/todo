@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/style/BaseStyle.dart';
 
-class TabStateless extends StatelessWidget {
-  final Function onTap;
+class TabComponent extends StatelessWidget {
+
+  /// Callback when user tap icon
+  final Function callback;
+  /// icon
   final Widget icon;
+  /// Text
   final Widget text;
 
-  TabStateless(this.text, {this.icon, this.onTap});
+  TabComponent(this.text, {this.icon, this.callback});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onTap(),
+      /// Handle event tap icon to callback
+      onTap: () => callback(),
       highlightColor: whiteColor,
       child: Container(
         child: Column(
