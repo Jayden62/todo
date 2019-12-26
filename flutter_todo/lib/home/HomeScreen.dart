@@ -82,7 +82,7 @@ class HomeState extends State<HomeScreen> {
   }
 
   Widget get initBody => WillPopScope(
-        /// WillPopScope will be unable Back Button on Android
+        /// WillPopScope will be disable Back Button on Android
         onWillPop: () async => false,
         child: Container(
             child: Column(
