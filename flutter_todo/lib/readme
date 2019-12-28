@@ -8,9 +8,22 @@
         requirements lúc đầu nên cho em sorry trước. Tiếp đến là đề cập về vấn đề quản lí state trong Flutter,
         hiện tại em dùng BLOC và setState để update lại các state hiện tại.
 
-     + Technical
+     + Technical :
         - Như em đã đề cập ở trên là em dùng BLOC.
         - Các data structures thì em đã làm project theo logic sử dụng như thực tế. Như là tương tác các check boxes
         ở màn hình AllScreen thì khi check vào sẽ chuyển đổi theo màn hình tương với CompleteScreen và InCompleteScreen.
-        -
+
+     + Problems :
+        - Trong app này thì em sẽ dùng PageView để chuyển đổi giữa các tab với nhau, việc chuyển đổi giữa
+        các Tabs với nhau thì sẽ initState lại widget, tuy nghiên có một thuộc tính để Keep State là
+
+                    [with AutomaticKeepAliveClientMixin]
+                     @override
+                      bool get wantKeepAlive => true;
+
+        nhưng nó sẽ không update lại được UI trên màn hình AllScreen từ việc giữ state giữa các màn hình. Đây cũng là
+        vấn đề em thắc mắc từ requirements của anh.
+
+     Phần mô tả em đã viết xong, cám ơn vì anh dành thời gian để đọc đó. Hi vọng là em sẽ có cơ hội làm việc ở công ty
+     anh, chúc anh một ngày tốt lành :D
 

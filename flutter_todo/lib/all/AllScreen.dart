@@ -15,7 +15,7 @@ class AllScreen extends StatefulWidget {
   State<StatefulWidget> createState() => AllState();
 }
 
-class AllState extends State<AllScreen> {
+class AllState extends State<AllScreen> with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
@@ -70,4 +70,7 @@ class AllState extends State<AllScreen> {
           ),
         )
       : Container();
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -3,9 +3,9 @@ import 'package:flutter_todo/model/Note.dart';
 import 'package:flutter_todo/style/BaseStyle.dart';
 
 class HomeComponent extends StatefulWidget {
-
   /// Note contains info to display
   final Note item;
+
   /// Callback when tapping checkbox.
   final Function(Note item, bool value) callback;
 
@@ -16,7 +16,6 @@ class HomeComponent extends StatefulWidget {
 }
 
 class HomeState extends State<HomeComponent> {
-
   @override
   Widget build(BuildContext context) {
     /// Create item if true, set item background is gray color else is white color
@@ -31,15 +30,11 @@ class HomeState extends State<HomeComponent> {
       margin: EdgeInsets.only(right: margin10, top: margin10),
       child: Checkbox(
         onChanged: (bool value) {
-//          setState(() {
-//            widget.item.isChecked = value;
-//            /// Call back
-//            widget.callback(widget.item, value);
-//          });
           /// Call back
           widget.callback(widget.item, value);
           return value;
         },
+
         /// True value will be displayed check
         value: widget.item.isChecked ? true : false,
       ));
