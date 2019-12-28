@@ -1,0 +1,16 @@
+ --- Tóm lược những gì đã làm được ---
+    Lời mở đầu : Dear anh Vũ, đây là phần mô tả bao gồm những gì em làm được trong To Do Application.
+    + Design Pattern :
+        - Có nhiều design pattern để quản lí state như : Redux, BLOC, Scope Model, Provider,... Trong một số cái trên,
+        em chọn BLOC(Business Logic Components) là vì được cộng đồng Flutter khuyên dùng và nó được đánh giá khá là tốt.
+        Cụ thể trong Project này em đã dùng nó ở màn hình HomeScreen để chuyển đổi giữa các Tab với nhau.InCompleteScreen
+        Như requirements lúc đầu là sẽ dùng Bottom Navigation Bar thì em đã custom lại,  này sẽ hơi ngược so với điều
+        requirements lúc đầu nên cho em sorry trước. Tiếp đến là đề cập về vấn đề quản lí state trong Flutter,
+        hiện tại em dùng BLOC và setState để update lại các state hiện tại.
+
+     + Technical
+        - Như em đã đề cập ở trên là em dùng BLOC.
+        - Các data structures thì em đã làm project theo logic sử dụng như thực tế. Như là tương tác các check boxes
+        ở màn hình AllScreen thì khi check vào sẽ chuyển đổi theo màn hình tương với CompleteScreen và InCompleteScreen.
+        -
+

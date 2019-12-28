@@ -12,7 +12,7 @@ class InCompleteScreen extends StatefulWidget {
   State<StatefulWidget> createState() => InCompleteState();
 }
 
-class InCompleteState extends State<InCompleteScreen>{
+class InCompleteState extends State<InCompleteScreen> {
   /// List contain item incomplete
   List<Note> inCompleteList = [];
 
@@ -30,9 +30,7 @@ class InCompleteState extends State<InCompleteScreen>{
 
   @override
   Widget build(BuildContext context) {
-
     print('InCompleteState saving state');
-
 
     /// Create list contain item is being incomplete
     return Container(

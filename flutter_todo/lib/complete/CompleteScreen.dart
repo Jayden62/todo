@@ -43,7 +43,9 @@ class CompleteState extends State<CompleteScreen> {
             itemCount: completeList.length,
             itemBuilder: (BuildContext context, int index) => HomeComponent(
                   completeList[index],
-                  callback: (Note note, bool value) {},
+                  callback: (Note note, bool value) {
+
+                  },
                 )));
   }
 }

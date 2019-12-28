@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_todo/style/BaseStyle.dart';
 
 class TabComponent extends StatelessWidget {
-
   /// Callback when user tap icon
   final Function callback;
+
   /// icon
   final Widget icon;
+
   /// Text
   final Widget text;
 
@@ -21,10 +22,7 @@ class TabComponent extends StatelessWidget {
       child: Container(
         child: Column(
           children: <Widget>[
-            Container(
-              margin: EdgeInsets.only(top: margin5),
-              child: icon,
-            ),
+            Container(margin: EdgeInsets.only(top: margin5), child: icon),
             text,
           ],
         ),
