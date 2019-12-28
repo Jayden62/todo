@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_todo/sharedcomponent/HomeComponent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/model/Note.dart';
+import 'package:test/test.dart';
 
 class AllScreen extends StatefulWidget {
   final List<Note> list;
@@ -59,6 +60,26 @@ class AllState extends State<AllScreen> with AutomaticKeepAliveClientMixin {
                   break;
                 }
               }
+
+              /// Unit test compare 2 objects
+              test('Unit test compare 2 objects', () {
+                bool expected = true;
+                bool test = false;
+                for (var item in data) {
+                  /// Call back from item, i will compare item selected to all off items in list via compare object.
+                  /// If matched, it will be assigned.
+                  if (item == note) {
+                    test = true;
+                    break;
+                  }
+                  test = false;
+                }
+
+                var actual = test;
+
+                // Asset
+                expect(actual, expected);
+              });
 
               if (found != null) {
                 found.isChecked = value;

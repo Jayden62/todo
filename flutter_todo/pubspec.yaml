@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   splashscreen: ^1.2.0
   uuid: ^2.0.4
+  test: ^1.9.4
 
 dev_dependencies:
   flutter_test:
