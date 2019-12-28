@@ -31,9 +31,11 @@ class HomeState extends State<HomeComponent> {
       margin: EdgeInsets.only(right: margin10, top: margin10),
       child: Checkbox(
         onChanged: (bool value) {
-          /// Call back
-          widget.callback(widget.item, value);
-
+          setState(() {
+            widget.item.isChecked = value;
+            /// Call back
+            widget.callback(widget.item, value);
+          });
           return value;
         },
         /// True value will be displayed check

@@ -12,8 +12,7 @@ class InCompleteScreen extends StatefulWidget {
   State<StatefulWidget> createState() => InCompleteState();
 }
 
-class InCompleteState extends State<InCompleteScreen>
-    with AutomaticKeepAliveClientMixin {
+class InCompleteState extends State<InCompleteScreen>{
   /// List contain item incomplete
   List<Note> inCompleteList = [];
 
@@ -31,7 +30,6 @@ class InCompleteState extends State<InCompleteScreen>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
 
     print('InCompleteState saving state');
 
@@ -45,7 +43,4 @@ class InCompleteState extends State<InCompleteScreen>
                   callback: (Note note, bool value) {},
                 )));
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

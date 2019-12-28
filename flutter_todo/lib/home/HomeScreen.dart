@@ -33,7 +33,6 @@ class HomeState extends State<HomeScreen> {
   int value;
   bool isChecked;
   List<Note> list = List();
-  final allStream = StreamController<List<Note>>.broadcast();
 
   @override
   void initState() {
@@ -79,7 +78,6 @@ class HomeState extends State<HomeScreen> {
 
     /// Close stream
     tabStream.close();
-    allStream.close();
   }
 
   @override
@@ -119,11 +117,9 @@ class HomeState extends State<HomeScreen> {
     List<Widget> widgets = [
       AllScreen(
         list,
-        updateStream: allStream,
-
         /// Handle callback from AllScreen
         callback: (Note note) {
-          allStream.sink.add(list);
+          ///TODO
         },
       ),
       CompleteScreen(list),

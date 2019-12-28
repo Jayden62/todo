@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/sharedcomponent/HomeComponent.dart';
 import 'package:flutter_todo/model/Note.dart';
@@ -14,15 +12,19 @@ class CompleteScreen extends StatefulWidget {
   State<StatefulWidget> createState() => CompleteState();
 }
 
-class CompleteState extends State<CompleteScreen>
-    with AutomaticKeepAliveClientMixin {
+class CompleteState extends State<CompleteScreen> {
   /// List contain item complete
   List<Note> completeList = [];
+
 
   @override
   void initState() {
     super.initState();
+      _filterComplete();
 
+  }
+  /// Filter complete data
+  void _filterComplete(){
     /// Find item is being complete
     for (var item in widget.list) {
       if (item.isChecked) {
@@ -33,7 +35,6 @@ class CompleteState extends State<CompleteScreen>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     print('CompleteState saving state');
 
     /// Create list contain item is being complete
@@ -45,7 +46,4 @@ class CompleteState extends State<CompleteScreen>
                   callback: (Note note, bool value) {},
                 )));
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
