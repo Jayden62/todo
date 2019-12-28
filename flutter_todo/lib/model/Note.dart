@@ -4,7 +4,22 @@ class Note {
   String content;
   bool isChecked;
 
-  Note({this.id, this.title, this.content,this.isChecked});
+  Note({this.id, this.title, this.content, this.isChecked});
+
+  /// Config to compare object
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Note &&
+          id == other.id &&
+          title == other.title &&
+          content == other.content &&
+          isChecked == other.isChecked;
+
+  /// Config to compare object
+  @override
+  int get hashCode =>
+      id.hashCode ^ title.hashCode ^ content.hashCode ^ isChecked.hashCode;
 
   Note.fromJson(Map<String, dynamic> json) {
     id = json['id'];

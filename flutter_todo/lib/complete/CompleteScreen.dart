@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/sharedcomponent/HomeComponent.dart';
 import 'package:flutter_todo/model/Note.dart';
@@ -32,6 +34,7 @@ class CompleteState extends State<CompleteScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    print('CompleteState saving state');
 
     /// Create list contain item is being complete
     return Container(

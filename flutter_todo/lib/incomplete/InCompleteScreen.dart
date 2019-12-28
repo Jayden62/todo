@@ -33,6 +33,9 @@ class InCompleteState extends State<InCompleteScreen>
   Widget build(BuildContext context) {
     super.build(context);
 
+    print('InCompleteState saving state');
+
+
     /// Create list contain item is being incomplete
     return Container(
         child: ListView.builder(

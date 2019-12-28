@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_todo/all/AllScreen.dart';
 import 'package:flutter_todo/complete/CompleteScreen.dart';
@@ -7,14 +6,15 @@ import 'package:flutter_todo/home/component/BottomComponent.dart';
 import 'package:flutter_todo/incomplete/InCompleteScreen.dart';
 import 'package:flutter_todo/model/Note.dart';
 import 'package:flutter_todo/home/component/TopComponent.dart';
-import 'package:flutter_todo/sharedcomponent/HomeComponent.dart';
 import 'package:flutter_todo/style/BaseStyle.dart';
 import 'package:uuid/uuid.dart';
 
 /// Index of page all
 const int PAGE_ALL = 0;
+
 /// Index of page complete
 const int PAGE_COMPLETE = 1;
+
 /// Index of page incomplete
 const int PAGE_INCOMPLETE = 2;
 
@@ -33,6 +33,7 @@ class HomeState extends State<HomeScreen> {
   int value;
   bool isChecked;
   List<Note> list = List();
+  final allStream = StreamController<List<Note>>.broadcast();
 
   @override
   void initState() {
@@ -67,17 +68,18 @@ class HomeState extends State<HomeScreen> {
         ),
       );
     }
-
-//    Future.delayed(Duration(milliseconds: 50), () {
-//      tabStream.sink.add(0);
-//    });
   }
 
   @override
   void dispose() {
     super.dispose();
+
+    /// Dispose controller
     pageController.dispose();
+
+    /// Close stream
     tabStream.close();
+    allStream.close();
   }
 
   @override
@@ -100,8 +102,9 @@ class HomeState extends State<HomeScreen> {
             initPages,
             BottomComponent(
               tabStream: tabStream,
+
               /// Handle event tab icon
-              callback: (int tabIndex){
+              callback: (int tabIndex) {
                 pageController.jumpToPage(tabIndex);
               },
             ),
@@ -114,7 +117,15 @@ class HomeState extends State<HomeScreen> {
   /// Init pages AllScreen, CompleteScreen, InCompleteScreen
   Widget get initPages {
     List<Widget> widgets = [
-      AllScreen(list),
+      AllScreen(
+        list,
+        updateStream: allStream,
+
+        /// Handle callback from AllScreen
+        callback: (Note note) {
+          allStream.sink.add(list);
+        },
+      ),
       CompleteScreen(list),
       InCompleteScreen(list),
     ];
@@ -138,7 +149,6 @@ class HomeState extends State<HomeScreen> {
       children: widgets,
     ));
   }
-
 
   PreferredSize get initAppBar {
     /// Default appbar is transparent.
