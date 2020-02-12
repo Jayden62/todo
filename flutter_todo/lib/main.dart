@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todo/help/HelpScreen.dart';
 import 'package:flutter_todo/home/HomeScreen.dart';
 
 void main() => runApp(MyApp());
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomeScreen(appName),
+//      home: HomeScreen(appName),
+      home: Scaffold(
+        body: HelpScreen(),
+      ),
     );
   }
 }

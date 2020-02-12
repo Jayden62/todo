@@ -52,7 +52,7 @@ class AllState extends State<AllScreen> with AutomaticKeepAliveClientMixin {
               /// Handle call back
               Note found;
               for (var item in data) {
-                /// Call back from item, i will compare item selected to all off items in list via compare object.
+                /// Call back from item, i will compare item selected to all of items in list via compare object.
                 /// If matched, it will be assigned.
                 if (item == note) {
                   found = item;
